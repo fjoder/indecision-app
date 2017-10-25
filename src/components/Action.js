@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Action = props => {
+const Action = (props) => {
   return (
     <div>
       <button 

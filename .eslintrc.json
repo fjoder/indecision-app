@@ -14,6 +14,7 @@
         "sourceType": "module"
     },
     "rules": {
+        "arrow-body-style": "warn",
         "comma-dangle": "warn",
         "no-const-assign": "warn",
         "no-this-before-super": "warn",
