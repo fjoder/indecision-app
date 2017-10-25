@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 class IndecisionApp extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +27,7 @@ class IndecisionApp extends React.Component {
   }
   
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.options.length !== this.options.length) {
+    if (prevState.options.length !== this.state.options.length) {
       const json = JSON.stringify(this.state.options);
       localStorage.setItem('options', json);
     }
@@ -34,9 +37,9 @@ class IndecisionApp extends React.Component {
     this.setState(() => ({ options: [] }));
   }
 
-  handleDeleteOption(option) {
+  handleDeleteOption(optionToRemove) {
     this.setState(prevState => ({
-      options: prevState.options.filter(i => option !== i)
+      options: prevState.options.filter(option => optionToRemove !== option)
     }));
   }
 

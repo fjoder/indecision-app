@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AddOption from './components/AddOption';
+import Option from './components/Option';
+import Options from './components/Options';
+import Action from './components/Action';
+import Header from './components/Header';
 import validator from 'validator';
 
 class IndecisionApp extends React.Component {
@@ -29,7 +33,7 @@ class IndecisionApp extends React.Component {
   }
   
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.options.length !== this.options.length) {
+    if (prevState.options.length !== this.state.options.length) {
       const json = JSON.stringify(this.state.options);
       localStorage.setItem('options', json);
     }
@@ -39,9 +43,9 @@ class IndecisionApp extends React.Component {
     this.setState(() => ({ options: [] }));
   }
 
-  handleDeleteOption(option) {
+  handleDeleteOption(optionToRemove) {
     this.setState(prevState => ({
-      options: prevState.options.filter(i => option !== i)
+      options: prevState.options.filter(option => optionToRemove !== option)
     }));
   }
 
@@ -80,62 +84,6 @@ class IndecisionApp extends React.Component {
       </div>
     );
   }
-}
-
-const Header = props => {
-  return (
-    <div>
-      <h1>{props.title}</h1>
-      {props.subtitle && <h2>{props.subtitle}</h2>}
-    </div>
-  );
-};
-
-Header.defaultProps = {
-  title: 'Indecision'
-};
-
-const Action = props => {
-  return (
-    <div>
-      <button onClick={props.handlePick} disabled={!props.hasOptions}>
-        What should I do?
-      </button>
-    </div>
-  );
-};
-
-const Options = props => {
-  return (
-    <div>
-      <button onClick={props.handleDeleteOptions}>Remove All</button>
-      {props.options.length === 0 && <p>Please add an option to get started</p>}
-      {
-        props.options.map(option => (
-          <Option 
-            key={option}
-            optionText={option}
-            handleDeleteOption={props.handleDeleteOption}
-          />
-        ))
-      }
-    </div>
-  );
-};
-
-const Option = props =>  {
-  return (
-    <div>
-      {props.optionText}
-      <button 
-        onClick={(e) => {
-          props.handleDeleteOption(props.optionText);
-        }}
-      >
-      remove
-      </button>
-    </div>
-  );
 }
 
 ReactDOM.render(<IndecisionApp />, document.getElementById("app"));
