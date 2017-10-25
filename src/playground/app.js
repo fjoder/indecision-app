@@ -20,12 +20,12 @@ class IndecisionApp extends React.Component {
 
       if (options) {
         this.setState(() => ({ options }));
-      }  
+      }
     } catch (error) {
       // Do nothing
     }
   }
-  
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.options.length !== this.state.options.length) {
       const json = JSON.stringify(this.state.options);
@@ -51,16 +51,16 @@ class IndecisionApp extends React.Component {
 
   handleAddOption(option) {
     if (!option) {
-      return "Enter valid value to item";
+      return 'Enter valid value to item';
     } else if (this.state.options.indexOf(option) > -1) {
-      return "This option already exisits";
+      return 'This option already exisits';
     }
 
     this.setState(prevState => ({ options: prevState.options.concat([option]) }));
   }
 
   render() {
-    const subtitle = "Put your life in the hands of a computer";
+    const subtitle = 'Put your life in the hands of a computer';
 
     return (
       <div>
@@ -80,7 +80,7 @@ class IndecisionApp extends React.Component {
   }
 }
 
-const Header = props => {
+const Header = (props) => {
   return (
     <div>
       <h1>{props.title}</h1>
@@ -93,7 +93,7 @@ Header.defaultProps = {
   title: 'Indecision'
 };
 
-const Action = props => {
+const Action = (props) => {
   return (
     <div>
       <button onClick={props.handlePick} disabled={!props.hasOptions}>
@@ -103,7 +103,7 @@ const Action = props => {
   );
 };
 
-const Options = props => {
+const Options = (props) => {
   return (
     <div>
       <button onClick={props.handleDeleteOptions}>Remove All</button>
@@ -121,7 +121,7 @@ const Options = props => {
   );
 };
 
-const Option = props =>  {
+const Option = (props) => {
   return (
     <div>
       {props.optionText}
@@ -134,7 +134,7 @@ const Option = props =>  {
       </button>
     </div>
   );
-}
+};
 
 class AddOption extends React.Component {
   constructor(props) {
@@ -171,4 +171,4 @@ class AddOption extends React.Component {
   }
 }
 
-ReactDOM.render(<IndecisionApp />, document.getElementById("app"));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
